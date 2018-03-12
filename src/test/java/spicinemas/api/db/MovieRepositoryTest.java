@@ -17,17 +17,17 @@ import static org.hamcrest.Matchers.is;
 @SpringBootTest()
 @ActiveProfiles("ci")
 @Ignore
-public class MovieRepoTest {
+public class MovieRepositoryTest {
 
     @Autowired
-    private MovieRepo movieRepo;
+    private MovieRepository movieRepository;
 
     @Test
     public void shouldInsertUserInDb(){
         String movieName = "Infinity War";
         Movie expectedMovie = new Movie(movieName, "", MovieListingType.NOW_SHOWING);
-        movieRepo.addMovie(expectedMovie);
-        Movie actualMovie = movieRepo.getMovie(movieName);
+        movieRepository.addMovie(expectedMovie);
+        Movie actualMovie = movieRepository.getMovie(movieName);
         assertThat(actualMovie, is(expectedMovie));
     }
 }

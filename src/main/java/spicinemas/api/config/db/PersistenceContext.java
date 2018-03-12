@@ -24,12 +24,7 @@ public class PersistenceContext {
 
     @Value("spring.profiles.active")
     private String activeProfile;
-    @Value("${spring.datasource.url}")
-    private String url;
-    @Value("${spring.datasource.username}")
-    private String userName;
-    @Value("${spring.datasource.password}")
-    private String password;
+
 
     @Bean
     public DataSourceConnectionProvider connectionProvider() {
@@ -51,16 +46,6 @@ public class PersistenceContext {
     @Bean
     public JOOQToSpringExceptionTransformer jooqToSpringExceptionTransformer() {
         return new JOOQToSpringExceptionTransformer();
-    }
-
-    @Bean
-    public DataSource dataSource() {
-        return DataSourceBuilder
-                .create()
-                .url(url)
-                .username(userName)
-                .password(password)
-                .build();
     }
 }
 

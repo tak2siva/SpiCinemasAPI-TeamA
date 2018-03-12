@@ -1,6 +1,7 @@
 package spicinemas.api.db;
 
 import spicinemas.api.model.Movie;
+import spicinemas.api.type.MovieListingType;
 import spicinemas.db.gen.tables.records.MovieRecord;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +14,14 @@ import static spicinemas.db.gen.tables.Movie.MOVIE;
 
 @Repository
 @Transactional
-public class MovieRepo {
+public class MovieRepository {
     @Autowired
     private DSLContext dsl;
 
-    public List<Movie> getNowShowingMovies() {
-        return null;
+    public List<MovieRecord> getNowShowingMovies() {
+        return dsl.selectFrom(MOVIE)
+           .where(MOVIE.LISTING_TYPE.eq(MovieListingType.NOW_SHOWING.name()))
+           .fetchInto(MovieRecord.class);
     }
 
     public void addMovie(Movie movie) {
