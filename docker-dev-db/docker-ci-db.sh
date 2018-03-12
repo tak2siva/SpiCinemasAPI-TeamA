@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" <<-EOSQL
-    CREATE DATABASE csmartci;
+    CREATE DATABASE spicinemas;
 
-    CREATE ROLE csmartuser WITH LOGIN PASSWORD 'csmartuser';
+    CREATE ROLE spiuser WITH LOGIN PASSWORD 'spiuser';
 
-    GRANT ALL ON DATABASE csmartci TO csmartuser;
-    GRANT ALL ON ALL TABLES IN SCHEMA public to csmartuser;
+    GRANT ALL ON DATABASE spicinemas TO spiuser;
+    GRANT ALL ON ALL TABLES IN SCHEMA public to spiuser;
 EOSQL

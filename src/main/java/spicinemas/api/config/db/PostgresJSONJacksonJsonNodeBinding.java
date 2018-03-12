@@ -1,4 +1,4 @@
-package csmart.api.config.db;
+package spicinemas.api.config.db;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import org.jooq.*;

@@ -1,9 +1,10 @@
 #Database Configuration
 spring:
- profile: test
+  profile: test
 
- datasource:
-   url: jdbc:postgresql://localhost:9876/csmarttest
-   username: csmartuser
-   password: csmartuser
+  datasource:
+    url: jdbc:postgresql://localhost:7654/spicinemas_test
+    username: spiuser
+    password: spiuser
+
 

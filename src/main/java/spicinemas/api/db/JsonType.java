@@ -1,4 +1,4 @@
-package csmart.api.db;
+package spicinemas.api.db;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,4 +1,4 @@
-package csmart.api.config.db;
+package spicinemas.api.config.db;
 
 import org.jooq.ExecuteContext;
 import org.jooq.SQLDialect;

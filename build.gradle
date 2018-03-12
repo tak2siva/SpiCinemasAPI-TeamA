@@ -31,6 +31,7 @@ repositories {
 }
 
 dependencies {
+	compileOnly 'org.projectlombok:lombok:1.16.20'
 	compile('org.springframework.boot:spring-boot-starter-jooq')
 	compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.boot:spring-boot-starter-web')
@@ -40,12 +41,12 @@ dependencies {
 }
 
 jooq {
-	csmart(sourceSets.main) {
+	spicinemas(sourceSets.main) {
 		jdbc {
 			driver = 'org.postgresql.Driver'
-			url = 'jdbc:postgresql://localhost:7654/csmartci'
-			user = 'csmartuser'
-			password = 'csmartuser'
+			url = 'jdbc:postgresql://localhost:7654/spicinemas'
+			user = 'spiuser'
+			password = 'spiuser'
 			schema = 'public'
 		}
 		generator {
@@ -59,7 +60,7 @@ jooq {
 				customTypes {
 					customType {
 						name = 'com.fasterxml.jackson.databind.JsonNode'
-						converter = 'csmart.api.config.db.PostgresJSONJacksonJsonNodeBinding'
+						converter = 'spicinemas.api.config.db.PostgresJSONJacksonJsonNodeBinding'
 					}
 				}
 				forcedTypes {
@@ -77,7 +78,7 @@ jooq {
 				fluentSetters = true
 			}
 			target {
-				packageName = 'csmart.db.gen'
+				packageName = 'spicinemas.db.gen'
 				directory = 'src/main/generated/java'
 			}
 		}
@@ -85,12 +86,12 @@ jooq {
 }
 
 flyway {
-	url = 'jdbc:postgresql://localhost:7654/csmartci'
-	user = 'csmartuser'
-	password = 'csmartuser'
+	url = 'jdbc:postgresql://localhost:7654/spicinemas'
+	user = 'spiuser'
+	password = 'spiuser'
 	schemas = ['public']
 	locations = ["filesystem:$project.projectDir/src/main/resources/db/migration"]
 }
 
-generateCsmartJooqSchemaSource.dependsOn flywayMigrate
+generateSpicinemasJooqSchemaSource.dependsOn flywayMigrate
 test.dependsOn flywayClean

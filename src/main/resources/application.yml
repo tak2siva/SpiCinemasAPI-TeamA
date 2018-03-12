@@ -4,3 +4,9 @@ server:
 security:
  basic:
   enabled: false
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:7654/spicinemas
+    username: spiuser
+    password: spiuser
