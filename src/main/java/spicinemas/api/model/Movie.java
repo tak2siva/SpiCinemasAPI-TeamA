@@ -1,8 +1,10 @@
 package spicinemas.api.model;
 
+import lombok.EqualsAndHashCode;
 import spicinemas.api.type.MovieListingType;
 import spicinemas.db.gen.tables.records.MovieRecord;
 
+@EqualsAndHashCode(exclude = {"id"})
 public class Movie {
     private Long id;
     private String name;

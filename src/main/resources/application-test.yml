@@ -1,6 +1,6 @@
 #Database Configuration
 spring:
-  profile: test
+  profiles: test
 
   datasource:
     url: jdbc:postgresql://localhost:7654/spicinemas_test
