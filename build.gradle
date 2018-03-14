@@ -47,9 +47,9 @@ jooq {
 	spicinemas(sourceSets.main) {
 		jdbc {
 			driver = 'org.postgresql.Driver'
-			url = 'jdbc:postgresql://localhost:7654/spicinemas'
-			user = 'spiuser'
-			password = 'spiuser'
+			url = "jdbc:postgresql://${config.db_host}:${config.port}/${config.db_name}"
+			user = config.username
+			password = config.password
 			schema = 'public'
 		}
 		generator {
