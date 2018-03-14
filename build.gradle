@@ -93,7 +93,7 @@ ext {
 }
 
 flyway {
-	url = "jdbc:postgresql://${config.db_host}:7654/${config.db_name}"
+	url = "jdbc:postgresql://${config.db_host}:${config.port}/${config.db_name}"
 	user = config.username
 	password = config.password
 	schemas = ['public']
