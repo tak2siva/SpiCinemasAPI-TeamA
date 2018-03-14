@@ -1,3 +1,5 @@
+import org.flywaydb.gradle.task.*
+
 buildscript {
 	ext {
 		springBootVersion = '1.4.1.RELEASE'
@@ -22,6 +24,7 @@ apply plugin: 'idea'
 apply plugin: 'spring-boot'
 apply plugin: 'nu.studer.jooq'
 apply plugin: "org.flywaydb.flyway"
+apply from: "configuration.gradle"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -85,10 +88,14 @@ jooq {
 	}
 }
 
+ext {
+	local_url = 'jdbc:postgresql://localhost:7654/spicinemas'
+}
+
 flyway {
-	url = 'jdbc:postgresql://localhost:7654/spicinemas'
-	user = 'spiuser'
-	password = 'spiuser'
+	url = "jdbc:postgresql://${config.db_host}:7654/${config.db_name}"
+	user = config.username
+	password = config.password
 	schemas = ['public']
 	locations = ["filesystem:$project.projectDir/src/main/resources/db/migration"]
 }

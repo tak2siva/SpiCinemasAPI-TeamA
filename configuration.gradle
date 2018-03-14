@@ -1,0 +1,18 @@
+def getConfig(environment) {
+    def configFile = file('env.groovy')
+    def config = new ConfigSlurper(environment).parse(configFile.toURL())
+    return config
+}
+
+def loadConfiguration() {
+    def environment = hasProperty('env') && env != '' ? env : 'dev'
+    project.ext.environment = environment
+
+    project.ext.config = getConfig(environment)
+}
+
+loadConfiguration()
+
+ext {
+    getConfig = this.&getConfig
+}
