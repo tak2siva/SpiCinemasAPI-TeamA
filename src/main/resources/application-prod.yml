@@ -1,0 +1,10 @@
+#Database Configuration
+spring:
+  profiles: prod
+
+  datasource:
+    url: jdbc:postgresql://postgres:5432/spicinemas
+    username: spiuser
+    password: spiuser
+
+
