@@ -3,8 +3,10 @@ package spicinemas.api.model;
 import lombok.EqualsAndHashCode;
 import spicinemas.db.gen.tables.records.LanguageRecord;
 
+import java.io.Serializable;
+
 @EqualsAndHashCode(exclude = {"id"})
-public class Language {
+public class Language implements Serializable{
     private Long id;
     private String name;
     private String description;

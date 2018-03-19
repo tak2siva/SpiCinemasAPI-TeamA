@@ -15,6 +15,7 @@ import spicinemas.api.type.MovieListingType;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertEquals;
 import static spicinemas.db.gen.tables.Movie.MOVIE;
 
 @RunWith(SpringRunner.class)
@@ -43,6 +44,6 @@ public class MovieRepositoryTest {
         Movie expectedMovie = new Movie(movieName, "okay", MovieListingType.NOW_SHOWING);
         movieRepo.addMovie(expectedMovie);
         Movie actualMovie = movieRepo.getMovie(movieName);
-        assertThat(actualMovie, is(expectedMovie));
+        assertEquals(actualMovie.getName(), expectedMovie.getName());
     }
 }

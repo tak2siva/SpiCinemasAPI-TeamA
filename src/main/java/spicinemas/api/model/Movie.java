@@ -6,37 +6,37 @@ import spicinemas.db.gen.tables.records.MovieRecord;
 
 @EqualsAndHashCode(exclude = {"id"})
 public class Movie {
-    private Long id;
-    private String name;
-    private String experiences;
-    private MovieListingType listingType;
+private Long id;
+private String name;
+private String experiences;
+private MovieListingType listingType;
 
-    public Movie(String name, String experiences, MovieListingType listingType) {
+public Movie(String name, String experiences, MovieListingType listingType) {
         this.name = name;
         this.experiences = experiences;
         this.listingType = listingType;
-    }
+        }
 
-    public Movie(MovieRecord movieRecord) {
+public Movie(MovieRecord movieRecord) {
         this.id = Long.valueOf(movieRecord.getId());
         this.name = movieRecord.getName();
         this.experiences = movieRecord.getExperiences();
         this.listingType = MovieListingType.valueOf(movieRecord.getListingType());
-    }
+        }
 
-    public Long getId() {
+public Long getId() {
         return id;
-    }
+        }
 
-    public String getName() {
+public String getName() {
         return name;
-    }
+        }
 
-    public String getExperiences() {
+public String getExperiences() {
         return experiences;
-    }
+        }
 
-    public MovieListingType getListingType() {
+public MovieListingType getListingType() {
         return listingType;
-    }
-}
+        }
+        }
