@@ -9,3 +9,4 @@ public class SpiCinemasApplication {
 		SpringApplication.run(SpiCinemasApplication.class, args);
 	}
 }
+
