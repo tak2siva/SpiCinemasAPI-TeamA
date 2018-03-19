@@ -1,3 +1,4 @@
+import org.flywaydb.core.Flyway
 import org.flywaydb.gradle.task.*
 
 buildscript {
@@ -77,7 +78,7 @@ jooq {
 				relations = true
 				deprecated = false
 				records = true
-				immutablePojos = false
+				immutablePojos = true
 				fluentSetters = true
 			}
 			target {
@@ -99,6 +100,8 @@ flyway {
 	schemas = ['public']
 	locations = ["filesystem:$project.projectDir/src/main/resources/db/migration"]
 }
+
+
 
 generateSpicinemasJooqSchemaSource.dependsOn flywayMigrate
 test.dependsOn flywayClean
