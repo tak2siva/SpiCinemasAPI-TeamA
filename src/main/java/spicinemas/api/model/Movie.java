@@ -4,7 +4,8 @@ import lombok.EqualsAndHashCode;
 import spicinemas.api.type.MovieListingType;
 import spicinemas.db.gen.tables.records.MovieRecord;
 
-@EqualsAndHashCode(exclude = {"id"})
+import java.util.Objects;
+
 public class Movie {
     private Long id;
     private String name;
@@ -38,5 +39,19 @@ public class Movie {
 
     public MovieListingType getListingType() {
         return listingType;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Movie movie = (Movie) o;
+        return Objects.equals(id, movie.id);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id);
     }
 }

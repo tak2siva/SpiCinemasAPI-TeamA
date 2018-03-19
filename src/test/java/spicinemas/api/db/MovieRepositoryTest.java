@@ -13,8 +13,12 @@ import spicinemas.SpiCinemasApplication;
 import spicinemas.api.model.Movie;
 import spicinemas.api.type.MovieListingType;
 
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.junit.Assert.assertEquals;
 import static spicinemas.db.gen.tables.Movie.MOVIE;
 
 @RunWith(SpringRunner.class)
@@ -28,21 +32,36 @@ public class MovieRepositoryTest {
 
     @Before
     public void init() {
-        dslContext.truncate(MOVIE).execute();
+
     }
 
     @After
     public void tearDown() {
-        dslContext.truncate(MOVIE).execute();
+
     }
 
-
+    /*
     @Test
     public void shouldInsertUserInDb(){
         String movieName = "Infinity War";
         Movie expectedMovie = new Movie(movieName, "okay", MovieListingType.NOW_SHOWING);
         movieRepo.addMovie(expectedMovie);
         Movie actualMovie = movieRepo.getMovie(movieName);
-        assertThat(actualMovie, is(expectedMovie));
+        assertEquals(actualMovie.getName(), expectedMovie.getName());
+    }
+    */
+
+    @Test
+    public void testIfKabaliIsNowShowingMovie() {
+        String movieName = "Kabali";
+        Movie movie = movieRepo.getMovie(movieName);
+        assertEquals(MovieListingType.NOW_SHOWING,movie.getListingType());
+    }
+
+    @Test
+    public void testIfThirunaalIsUpcomingMovie() {
+        String movieName = "Thirunaal";
+        Movie movie = movieRepo.getMovie(movieName);
+        assertEquals(MovieListingType.UPCOMING_RELEASE,movie.getListingType());
     }
 }

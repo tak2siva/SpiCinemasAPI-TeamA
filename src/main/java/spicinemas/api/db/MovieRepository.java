@@ -42,8 +42,8 @@ public class MovieRepository {
     }
 
     public Movie getMovie(String name) {
-        MovieRecord movieRecord = dsl.select()
-                .from(MOVIE)
+        MovieRecord movieRecord = dsl
+                .selectFrom(MOVIE)
                 .where(MOVIE.NAME.eq(name))
                 .fetchOne()
                 .into(MovieRecord.class);

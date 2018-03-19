@@ -4,3 +4,5 @@ CREATE TABLE MOVIE (
 	experiences varchar(255) NOT NULL,
 	listing_type varchar(20) NULL
 );
+
+
