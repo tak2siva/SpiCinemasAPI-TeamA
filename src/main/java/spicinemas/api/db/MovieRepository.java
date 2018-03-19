@@ -23,9 +23,15 @@ public class MovieRepository {
     private DSLContext dsl;
 
     public List<Movie> getNowShowingMovies() {
-         return dsl.selectFrom(MOVIE).fetchMap(MOVIE.ID)
+         return dsl.selectFrom(MOVIE).where(MOVIE.LISTING_TYPE.eq(MovieListingType.NOW_SHOWING.name())).fetchMap(MOVIE.ID)
                  .values()
                  .stream().map(Movie::new).collect(toList());
+    }
+
+    public List<Movie> getUpcomingMovies() {
+        return dsl.selectFrom(MOVIE).where(MOVIE.LISTING_TYPE.eq(MovieListingType.UPCOMING_RELEASE.name())).fetchMap(MOVIE.ID)
+                .values()
+                .stream().map(Movie::new).collect(toList());
     }
 
     public void addMovie(Movie movie) {
