@@ -1,13 +1,12 @@
 package spicinemas.api.controller;
 
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.*;
 import spicinemas.api.db.MovieRepository;
 import spicinemas.api.model.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import spicinemas.api.service.MovieService;
 import spicinemas.api.type.MovieListingType;
 
 import java.util.List;
@@ -16,6 +15,8 @@ import java.util.List;
 public class MovieController {
     @Autowired
     private MovieRepository movieRepo;
+    @Autowired
+    private MovieService movieService;
 
     @RequestMapping(value = "/init",
             method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -40,5 +41,12 @@ public class MovieController {
     public List<Movie> getMoviesInLocation(@PathVariable String locationCode){
         return movieRepo.getMoviesInLocation(locationCode);
     }
+
+    @RequestMapping(value = "movies",
+            method = RequestMethod.GET)
+    public List<Movie> getMovies(@RequestParam("location") String locationCode, @RequestParam("language") String language, @RequestParam("listingType") String listingType){
+        return movieService.getMovies( locationCode, language, listingType );
+    }
+
 
 }

@@ -11,6 +11,9 @@ public class Movie {
     private String name;
     private String experiences;
     private MovieListingType listingType;
+
+
+
     private String language;
 
     public Movie(String name, String experiences, MovieListingType listingType) {
@@ -48,6 +51,10 @@ public class Movie {
 
     public MovieListingType getListingType() {
         return listingType;
+    }
+
+    public String getLanguage() {
+        return language;
     }
 
     @Override
