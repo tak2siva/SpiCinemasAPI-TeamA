@@ -1,6 +1,6 @@
 CREATE TABLE LANGUAGE (
 	id    SERIAL PRIMARY KEY,
-	name varchar(255) NOT NULL,
+	code  CHAR(2) NOT NULL UNIQUE ,
 	description  varchar(255) NULL
 
 );

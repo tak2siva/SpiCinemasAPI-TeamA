@@ -8,17 +8,17 @@ import java.io.Serializable;
 @EqualsAndHashCode(exclude = {"id"})
 public class Language implements Serializable{
     private Long id;
-    private String name;
+    private String code;
     private String description;
 
-    public Language(String name, String description) {
-        this.name = name;
+    public Language(String code, String description) {
+        this.code = code;
         this.description = description;
     }
 
     public Language(LanguageRecord languageRecord) {
         this.id = Long.valueOf(languageRecord.getId());
-        this.name = languageRecord.getName();
+        this.code = languageRecord.getCode();
         this.description = languageRecord.getDescription();
     }
 
@@ -26,8 +26,8 @@ public class Language implements Serializable{
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getCode() {
+        return code;
     }
 
     public String getDescription() {return description; }

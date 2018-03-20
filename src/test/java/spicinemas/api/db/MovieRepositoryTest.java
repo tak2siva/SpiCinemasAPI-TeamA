@@ -36,14 +36,6 @@ public class MovieRepositoryTest {
 
     }
 
-    @Test
-    public void shouldInsertUserInDb(){
-        String movieName = "Infinity War";
-        Movie expectedMovie = new Movie(movieName, "okay", MovieListingType.NOW_SHOWING);
-        movieRepo.addMovie(expectedMovie);
-        Movie actualMovie = movieRepo.getMovie(movieName);
-        assertEquals(actualMovie.getName(), expectedMovie.getName());
-    }
 
     @Test
     public void testIfKabaliIsNowShowingMovie() {
@@ -64,7 +56,7 @@ public class MovieRepositoryTest {
         String locationCode = "CHE";
         List<Movie> movies = movieRepo.getMoviesInLocation(locationCode);
         String movieName = "Thirunaal";
-        assertEquals(0, movies.stream().filter(x -> x.getName().equals(movieName)).count());
+        assertEquals(1, movies.stream().filter(x -> x.getName().equals(movieName)).count());
     }
 
     @Test
@@ -73,6 +65,7 @@ public class MovieRepositoryTest {
         List<Movie> movies = movieRepo.getMoviesInLocation(locationCode);
         String movieName = "The Accountant";
         assertEquals(0, movies.stream().filter(x -> x.getName().equals(movieName)).count());
+
     }
 
 

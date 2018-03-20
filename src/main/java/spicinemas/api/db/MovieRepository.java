@@ -55,12 +55,10 @@ public class MovieRepository {
             MOVIE.NAME.as("movie_name"),
             MOVIE.EXPERIENCES.as("experience"),
             MOVIE.LISTING_TYPE.as("listing_type"),
-            MOVIE_LANGUAGE.LANGUAGE_NAME.as("language_type")
+            LOCATION_MOVIE.LANGUAGE_CODE.as("language_type")
         ).from(MOVIE)
             .innerJoin(LOCATION_MOVIE)
             .on(MOVIE.ID.eq(LOCATION_MOVIE.MOVIE_ID))
-            .innerJoin(MOVIE_LANGUAGE)
-            .on(MOVIE.ID.eq(MOVIE_LANGUAGE.MOVIE_ID))
             .where(LOCATION_MOVIE.LOCATION_CODE.eq(locationCode))
             .fetch()
             .stream()
