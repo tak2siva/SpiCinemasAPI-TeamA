@@ -1,0 +1,2 @@
+insert into MOVIE (name, experiences, listing_type, languageID, locationID) values ('RedSparrow', 'RDX, Dolby Atmos, SUB', 'NOW_SHOWING', 1 , 1);
+insert into MOVIE (name, experiences, listing_type, languageID, locationID) values ('TheArtist', 'RDX, Dolby Atmos, SUB', 'NOW_SHOWING', 2, 1);
