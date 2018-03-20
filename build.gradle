@@ -1,6 +1,3 @@
-import org.flywaydb.core.Flyway
-import org.flywaydb.gradle.task.*
-
 buildscript {
 	ext {
 		springBootVersion = '1.4.1.RELEASE'

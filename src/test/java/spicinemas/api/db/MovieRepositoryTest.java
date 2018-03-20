@@ -15,11 +15,7 @@ import spicinemas.api.type.MovieListingType;
 
 import java.util.List;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertEquals;
-import static spicinemas.db.gen.tables.Movie.MOVIE;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SpiCinemasApplication.class)
@@ -40,7 +36,6 @@ public class MovieRepositoryTest {
 
     }
 
-    /*
     @Test
     public void shouldInsertUserInDb(){
         String movieName = "Infinity War";
@@ -49,7 +44,6 @@ public class MovieRepositoryTest {
         Movie actualMovie = movieRepo.getMovie(movieName);
         assertEquals(actualMovie.getName(), expectedMovie.getName());
     }
-    */
 
     @Test
     public void testIfKabaliIsNowShowingMovie() {
@@ -64,4 +58,22 @@ public class MovieRepositoryTest {
         Movie movie = movieRepo.getMovie(movieName);
         assertEquals(MovieListingType.UPCOMING_RELEASE,movie.getListingType());
     }
+
+    @Test
+    public void testIfThirunaalIsRunningInChennai() {
+        String locationCode = "CHE";
+        List<Movie> movies = movieRepo.getMoviesInLocation(locationCode);
+        String movieName = "Thirunaal";
+        assertEquals(0, movies.stream().filter(x -> x.getName().equals(movieName)).count());
+    }
+
+    @Test
+    public void testIfTheAccountantIsNotRunningInChennai() {
+        String locationCode = "CHE";
+        List<Movie> movies = movieRepo.getMoviesInLocation(locationCode);
+        String movieName = "The Accountant";
+        assertEquals(0, movies.stream().filter(x -> x.getName().equals(movieName)).count());
+    }
+
+
 }

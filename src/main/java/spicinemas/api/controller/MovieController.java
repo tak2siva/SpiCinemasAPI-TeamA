@@ -1,5 +1,6 @@
 package spicinemas.api.controller;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import spicinemas.api.db.MovieRepository;
 import spicinemas.api.model.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class MovieController {
     @RequestMapping(value = "/init",
             method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public void init() {
-        movieRepo.addMovie(new Movie("Dunkirk", "good", MovieListingType.NOW_SHOWING));
+        //movieRepo.addMovie(new Movie("Dunkirk", "good", MovieListingType.NOW_SHOWING));
     }
 
     @RequestMapping(value = "/movies/now-showing",
@@ -32,6 +33,12 @@ public class MovieController {
             method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Movie> getUpcomingMovies() {
         return movieRepo.getUpcomingMovies();
+    }
+
+    @RequestMapping(value = "/location/{locationCode}/movies",
+            method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Movie> getMoviesInLocation(@PathVariable String locationCode){
+        return movieRepo.getMoviesInLocation(locationCode);
     }
 
 }

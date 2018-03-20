@@ -1,0 +1,5 @@
+CREATE TABLE LOCATION (
+	id    SERIAL PRIMARY KEY,
+	code char(3) UNIQUE,
+	name varchar(255) NOT NULL
+);
