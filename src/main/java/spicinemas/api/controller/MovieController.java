@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import spicinemas.api.service.MovieService;
 import spicinemas.api.type.MovieListingType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController

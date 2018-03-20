@@ -17,7 +17,7 @@ import static java.util.stream.Collectors.toList;
 public class MovieService {
 
     @Autowired
-    MovieRepository repository;
+    private MovieRepository repository;
 
     private static final String COMMA = ",";
     private static final String BLANK = "";
@@ -28,7 +28,7 @@ public class MovieService {
 
 
     public List<Movie> getMovies(String location, String language) {
-        StringTokenizer languageTokens = new StringTokenizer( language );
+        StringTokenizer languageTokens = new StringTokenizer( language , COMMA );
         List<Movie> movies = new ArrayList<>(  );
         List<Movie> moviesForLocation = this.getMovies(location);
         while (languageTokens.hasMoreTokens())
@@ -50,7 +50,7 @@ public class MovieService {
         List<Movie> movies = new ArrayList<>(  );
         List<Movie> moviesforLocation = this.getMovies( location );
         List<Movie> moviesForLocationAndListingType = moviesforLocation.stream().filter( movie -> movie.getListingType().equals( MovieListingType.valueOf(listingType))).collect(toList());
-        StringTokenizer languageTokens = new StringTokenizer( language );
+        StringTokenizer languageTokens = new StringTokenizer( language , COMMA);
         while (languageTokens.hasMoreTokens())
         {
             List<Movie> moviesForlocationAndALanguageAndListingType = getMovies( languageTokens.nextToken(), moviesForLocationAndListingType );
