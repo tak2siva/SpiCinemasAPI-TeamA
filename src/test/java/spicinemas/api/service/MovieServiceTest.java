@@ -25,7 +25,7 @@ import static org.junit.Assert.*;
 @ActiveProfiles("test")
 public class MovieServiceTest {
 
-    private static final String EN = "EN" ;
+
     @Autowired
     MovieService movieService;
 
@@ -33,8 +33,7 @@ public class MovieServiceTest {
     public void testMoviesForLocation()
     {
         List<Movie> movies = movieService.getMovies("CHE");
-        assertEquals(5, movies.size());
-
+        assertThat( movies.stream().map( Movie::getName ).collect( toList() ), containsInAnyOrder( "Kabali", "Sultan" , "Thirunaal", "Banjo", "Suicide Squad")  );
     }
 
     @Test
@@ -45,33 +44,33 @@ public class MovieServiceTest {
     }
 
     @Test
-    public void testMoviesForlocationAndLanguage()
+    public void testMoviesForlocationAndListing()
     {
-        List<Movie> movies = movieService.getMovies( "CHE", "EN" );
-        assertThat( movies.stream().map( Movie::getLanguage ).collect( toList() ), everyItem(equalTo( "EN" ) )  );
+        List<Movie> movies = movieService.getMovies( "CHE", String.valueOf( MovieListingType.NOW_SHOWING ) );
+        assertThat( movies.stream().map( Movie::getListingType ).collect( toList() ), everyItem(equalTo( MovieListingType.NOW_SHOWING ) )  );
 
     }
 
     @Test
-    public void testMoviesForNolocationAndlanguage()
+    public void testMoviesForNolocationAndlisting()
     {
-        List<Movie> movies = movieService.getMovies( "PKT", "EN" );
-        assertThat( movies.stream().map( Movie::getLanguage ).collect( toList() ), everyItem( isOneOf( "EN" ) )) ;
+        List<Movie> movies = movieService.getMovies( "PKT", String.valueOf( MovieListingType.NOW_SHOWING ) );
+        assertThat( movies.stream().map( Movie::getListingType ).collect( toList() ), everyItem( equalTo( "NOW_SHOWING" ) )) ;
 
     }
 
     @Test
-    public void testMoviesForLocationAndMultipleLanguages()
+    public void testMoviesForLocationListingAndMultipleLanguages()
     {
-        List<Movie> movies = movieService.getMovies( "TRI" , "EN, FR" );
+        List<Movie> movies = movieService.getMovies( "TRI" , String.valueOf( MovieListingType.NOW_SHOWING ) ,"EN, FR" );
         assertThat( movies.stream().map( Movie::getLanguage ).collect( toList() ),  everyItem(isOneOf( "EN", "FR" ) )) ;
     }
 
 
     @Test
-    public void MoviesForLocationAndlanguageAndListingType()
+    public void testMoviesForLocationAndlanguageAndListingType()
     {
-        List<Movie> movies = movieService.getMovies( "CHE" , "EN", String.valueOf( MovieListingType.NOW_SHOWING ));
+        List<Movie> movies = movieService.getMovies( "CHE" , String.valueOf( MovieListingType.NOW_SHOWING ), "EN");
         assertThat( movies.stream().map( Movie::getListingType ).collect( toList()) , everyItem(equalTo( MovieListingType.NOW_SHOWING ))) ;
         assertThat( movies.stream().map( Movie::getLanguage ).collect( toList() ), everyItem(equalTo( "EN" )  ) );
     }

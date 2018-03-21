@@ -27,16 +27,8 @@ public class MovieService {
     }
 
 
-    public List<Movie> getMovies(String location, String language) {
-        StringTokenizer languageTokens = new StringTokenizer( language , COMMA );
-        List<Movie> movies = new ArrayList<>(  );
-        List<Movie> moviesForLocation = this.getMovies(location);
-        while (languageTokens.hasMoreTokens())
-        {
-            List<Movie> moviesForlocationAndALanguage = getMovies( languageTokens.nextToken(), moviesForLocation );
-            movies.addAll( moviesForlocationAndALanguage );
-        }
-        return movies;
+    public List<Movie> getMovies(String location, String listingType) {
+        return  this.getMovies( location ).stream().filter( movie -> movie.getListingType().equals( MovieListingType.valueOf(listingType))).collect(toList());
     }
 
     private List<Movie> getMovies(String languageToken, List<Movie> moviesForLocation) {
@@ -46,10 +38,9 @@ public class MovieService {
     }
 
 
-    public List<Movie> getMovies(String location, String language, String listingType) {
+    public List<Movie> getMovies(String location, String listingType, String language) {
         List<Movie> movies = new ArrayList<>(  );
-        List<Movie> moviesforLocation = this.getMovies( location );
-        List<Movie> moviesForLocationAndListingType = moviesforLocation.stream().filter( movie -> movie.getListingType().equals( MovieListingType.valueOf(listingType))).collect(toList());
+        List<Movie> moviesForLocationAndListingType = this.getMovies( location, listingType );
         StringTokenizer languageTokens = new StringTokenizer( language , COMMA);
         while (languageTokens.hasMoreTokens())
         {

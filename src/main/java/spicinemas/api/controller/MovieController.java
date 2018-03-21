@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@ControllerAdvice
 public class MovieController {
     @Autowired
     private MovieRepository movieRepo;
@@ -45,9 +46,12 @@ public class MovieController {
 
     @RequestMapping(value = "movies",
             method = RequestMethod.GET)
-    public List<Movie> getMovies(@RequestParam("location") String locationCode, @RequestParam("language") String language, @RequestParam("listingType") String listingType){
-        return movieService.getMovies( locationCode, language, listingType );
-    }
+    public List<Movie> getMovies(@RequestParam("location") String locationCode, @RequestParam(value = "language", required = false, defaultValue = "") String language, @RequestParam("listingType") String listingType){
+        if ((language != null) && (!language.isEmpty()))
+            return movieService.getMovies( locationCode, listingType, language );
+        else
+            return movieService.getMovies( locationCode, listingType );
 
+    }
 
 }
